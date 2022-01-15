@@ -16,13 +16,13 @@ class TodoApp extends RotomElement {
   }
 
   render() {
-    return `
-      <div class="wrapper">
-        <todo-header></todo-header>
-        <todo-body></todo-body>
-        <todo-footer></todo-footer>
+    return (
+      <div attrs={{ class: "wrapper" }}>
+        <todo-header />
+        <todo-body />
+        <todo-footer />
       </div>
-    `
+    )
   }
 }
 

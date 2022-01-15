@@ -28,16 +28,6 @@ class TodoBody extends RotomElement {
     this.debounceInput = debounce(this.handleDebouncedInput, 500)
   }
 
-  onMount() {
-    this.addEventListener("click", this.handleClick)
-    this.addEventListener("input", this.handleInput)
-  }
-
-  onUnmount() {
-    this.removeEventListener("click", this.handleClick)
-    this.removeEventListener("input", this.handleInput)
-  }
-
   onUpdate() {
     this.focusDraftTodo()
   }
@@ -63,12 +53,12 @@ class TodoBody extends RotomElement {
     }
   }
 
-  handleDebouncedInput(source) {
-    if (!source.classList.contains("todo--textarea")) return
+  handleDebouncedInput(target) {
+    if (!target.classList.contains("todo--textarea")) return
 
     dispatch(actions.SAVE_TODO, {
-      id: source.parentElement.id,
-      value: source.value,
+      id: target.parentElement.id,
+      value: target.value,
     })
   }
 
@@ -77,11 +67,14 @@ class TodoBody extends RotomElement {
   }
 
   renderEmptyState() {
-    return `
-      <p>You're done! Rejoice! :)</p>
-      <br/>
-      <p>Or... create more todos!</p>
-    `
+    return (
+      <p>
+        You're done! Rejoice! :)
+        <br />
+        <br />
+        Or<span attrs={{ "aria-hidden": "true" }}>...</span> create more todos!
+      </p>
+    )
   }
 
   renderTodos() {
@@ -89,30 +82,28 @@ class TodoBody extends RotomElement {
       return this.renderEmptyState()
     }
 
-    return this.todos.reduce((todos, todo) => {
-      todos += `
-        <div class="todo" data-key="${todo.id}" id="${todo.id}">
-          <textarea class="todo--textarea" placeholder="${todo.placeholder}">
-            ${todo.value}
-          </textarea>
-          <todo-action-button 
-            class="todo-body-action-button"
-            icon="–"
-          >
-            Delete
-          </todo-action-button>
-        </div>
-      `
-      return todos
-    }, "")
+    return this.todos.map((todo) => (
+      <div
+        on={{ click: this.handleClick, input: this.handleInput }}
+        attrs={{ class: "todo", id: todo.id }}
+        key={todo.id}
+      >
+        <textarea
+          attrs={{ class: "todo--textarea", placeholder: todo.placeholder }}
+        >
+          {todo.value}
+        </textarea>
+        <todo-action-button
+          attrs={{ class: "todo-body-action-button", icon: "–" }}
+        >
+          Delete
+        </todo-action-button>
+      </div>
+    ))
   }
 
   render() {
-    return `
-      <main class="todo-body">
-        ${this.renderTodos()}
-      </main>
-    `
+    return <main attrs={{ class: "todo-body" }}>{this.renderTodos()}</main>
   }
 }
 

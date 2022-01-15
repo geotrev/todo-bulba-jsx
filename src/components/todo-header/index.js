@@ -14,34 +14,28 @@ class TodoHeader extends RotomElement {
     this.handleClick = this.handleClick.bind(this)
   }
 
-  onMount() {
-    this.button = this.shadowRoot.querySelector("todo-action-button")
-    this.button.addEventListener("click", this.handleClick)
-  }
-
-  onUnmount() {
-    this.button.removeEventListener("click", this.handleClick)
-  }
-
   handleClick() {
     dispatch(actions.ADD_TODO)
   }
 
   render() {
-    return `
-      <header class="todo-header">
-        <h1 class="todo-header--heading">
-          <span aria-hidden="true">/</span>TooDoo
+    return (
+      <header attrs={{ class: "todo-header" }}>
+        <h1 attrs={{ class: "todo-header--heading" }}>
+          <span attrs={{ "aria-hidden": "true" }}>/</span>TooDoo
         </h1>
-        <todo-action-button 
-          class="todo-header-action-button" 
-          icon="+" 
-          size="lg"
+        <todo-action-button
+          on={{ click: this.handleClick }}
+          attrs={{
+            class: "todo-header-action-button",
+            icon: "+",
+            size: "lg",
+          }}
         >
           Add Todo
         </todo-action-button>
       </header>
-    `
+    )
   }
 }
 

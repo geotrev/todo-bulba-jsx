@@ -8,15 +8,15 @@ class TodoFooter extends RotomElement {
   }
 
   render() {
-    return `
-      <footer class="todo-footer">
+    return (
+      <footer attrs={{ class: "todo-footer" }}>
         <p>
-          <a href="https://github.com/geotrev">
+          <a attrs={{ href: "https://github.com/geotrev" }}>
             Created by George Treviranus
           </a>
         </p>
       </footer>
-    `
+    )
   }
 }
 
