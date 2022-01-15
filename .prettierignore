@@ -1,0 +1,4 @@
+node_modules/
+public/reset.css
+public/bundle.js
+public/bundle.js.gz

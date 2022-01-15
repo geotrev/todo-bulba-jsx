@@ -1,0 +1,49 @@
+@use "../../shared/sass/host";
+
+:host {
+  display: block;
+  overflow: auto;
+}
+
+.todo-body {
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
+}
+
+.todo {
+  display: flex;
+  align-content: flex-end;
+  align-items: flex-end;
+  padding-block-end: 0.25rem;
+  margin-block-end: 1.5rem;
+
+  &--textarea {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1;
+    overflow-wrap: anywhere;
+    align-items: center;
+    color: var(--color-pewter);
+    font-family: inherit;
+    font-size: 1.25rem;
+    min-width: 9rem;
+    max-width: 32rem;
+    outline: none;
+    margin-inline-end: 1rem;
+    border-block-start: none;
+    border-block-end: 3px solid rgba(var(--color-bistre-rgb), 0.5);
+    border-inline-start: none;
+    border-inline-end: none;
+    background-color: transparent;
+    transition: 0.25s ease;
+
+    &:hover,
+    &:focus {
+      border-block-end-color: var(--color-bistre);
+    }
+  }
+
+  .todo-body-action-button {
+    max-height: 4rem;
+  }
+}
