@@ -1,30 +1,35 @@
-import { RotomElement, register } from "rotom/jsx"
 import { jsx } from "snabbdom"
+import { RotomElement, register } from "rotom/jsx"
 import styles from "./styles.scss"
 
 class TodoActionButton extends RotomElement {
+  static get properties() {
+    return {
+      icon: {
+        default: (c) => c.getAttribute("icon"),
+        type: "string",
+        reflected: true,
+        required: true,
+      },
+      size: {
+        default: (c) => c.getAttribute("size") || "md",
+        type: "string",
+        reflected: true,
+      },
+    }
+  }
+
   static get styles() {
     return styles
   }
 
-  renderIcon() {
-    const icon = this.getAttribute("icon")
-    if (!icon) return
-
-    return (
-      <span attrs={{ ariaHidden: "true", class: "todo-action-button--icon" }}>
-        {icon}
-      </span>
-    )
-  }
-
   render() {
-    const size = this.getAttribute("size") || "md"
-
     return (
-      <button attrs={{ class: `todo-action-button ${size}` }}>
-        {this.renderIcon()}
-        <span attrs={{ class: "todo-action-button--text" }}>
+      <button className={`todo-action-button ${this.size}`}>
+        <span aria-hidden="true" className="todo-action-button--icon">
+          {this.icon}
+        </span>
+        <span className="todo-action-button--text">
           <slot />
         </span>
       </button>

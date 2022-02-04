@@ -1,6 +1,6 @@
+import { jsx } from "snabbdom"
 import debounce from "lodash-es/debounce"
 import { RotomElement, register } from "rotom/jsx"
-import { jsx } from "snabbdom"
 import { dispatch, subscribe, actions } from "../../store"
 import "../todo-action-button"
 import styles from "./styles.scss"
@@ -43,7 +43,6 @@ class TodoBody extends RotomElement {
 
   handleClick(event) {
     const path = event.composedPath()
-
     const deleteBtn = path.find(
       (element) => element.tagName && element.tagName === "TODO-ACTION-BUTTON"
     )
@@ -72,7 +71,7 @@ class TodoBody extends RotomElement {
         You're done! Rejoice! :)
         <br />
         <br />
-        Or<span attrs={{ "aria-hidden": "true" }}>...</span> create more todos!
+        Or<span aria-hidden="true">...</span> create more todos!
       </p>
     )
   }
@@ -84,18 +83,16 @@ class TodoBody extends RotomElement {
 
     return this.todos.map((todo) => (
       <div
-        on={{ click: this.handleClick, input: this.handleInput }}
-        attrs={{ class: "todo", id: todo.id }}
+        on-click={this.handleClick}
+        on-input={this.handleInput}
+        className="todo"
+        id={todo.id}
         key={todo.id}
       >
-        <textarea
-          attrs={{ class: "todo--textarea", placeholder: todo.placeholder }}
-        >
+        <textarea className="todo--textarea" placeholder={todo.placeholder}>
           {todo.value}
         </textarea>
-        <todo-action-button
-          attrs={{ class: "todo-body-action-button", icon: "–" }}
-        >
+        <todo-action-button className="todo-body-action-button" icon="-">
           Delete
         </todo-action-button>
       </div>
@@ -103,7 +100,7 @@ class TodoBody extends RotomElement {
   }
 
   render() {
-    return <main attrs={{ class: "todo-body" }}>{this.renderTodos()}</main>
+    return <main className="todo-body">{this.renderTodos()}</main>
   }
 }
 

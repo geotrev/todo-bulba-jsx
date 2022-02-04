@@ -15,19 +15,6 @@ const PUBLIC_PATH = path.resolve(__dirname, "public")
 const SOURCE_PATH = path.resolve(__dirname, "src/index.js")
 const OUTPUT_PATH = path.resolve(__dirname, "public/bundle.js")
 
-const terserPlugin = terser({
-  output: {
-    comments: function (node, comment) {
-      var text = comment.value
-      var type = comment.type
-      if (type == "comment2") {
-        // multiline comment
-        return /@preserve|@license|@cc_on/i.test(text)
-      }
-    },
-  },
-})
-
 const scssOptions = {
   processor: () => postcss([autoprefixer]),
   sass,
@@ -36,7 +23,7 @@ const scssOptions = {
 
 const plugins =
   process.env.BUILD_ENV === "build"
-    ? [terserPlugin, gzipPlugin()]
+    ? [terser(), gzipPlugin()]
     : [
         livereload({ watch: PUBLIC_PATH }),
         serve({

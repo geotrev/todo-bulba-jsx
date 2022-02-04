@@ -1,5 +1,5 @@
-import { RotomElement, register } from "rotom/jsx"
 import { jsx } from "snabbdom"
+import { RotomElement, register } from "rotom/jsx"
 import styles from "./styles.scss"
 
 class TodoFooter extends RotomElement {
@@ -9,11 +9,9 @@ class TodoFooter extends RotomElement {
 
   render() {
     return (
-      <footer attrs={{ class: "todo-footer" }}>
+      <footer className="todo-footer">
         <p>
-          <a attrs={{ href: "https://github.com/geotrev" }}>
-            Created by George Treviranus
-          </a>
+          <a href="https://github.com/geotrev">Created by George Treviranus</a>
         </p>
       </footer>
     )

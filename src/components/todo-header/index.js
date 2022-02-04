@@ -1,5 +1,5 @@
-import { RotomElement, register } from "rotom/jsx"
 import { jsx } from "snabbdom"
+import { RotomElement, register } from "rotom/jsx"
 import { dispatch, actions } from "../../store"
 import "../todo-action-button"
 import styles from "./styles.scss"
@@ -20,17 +20,15 @@ class TodoHeader extends RotomElement {
 
   render() {
     return (
-      <header attrs={{ class: "todo-header" }}>
-        <h1 attrs={{ class: "todo-header--heading" }}>
-          <span attrs={{ "aria-hidden": "true" }}>/</span>TooDoo
+      <header className="todo-header">
+        <h1 className="todo-header--heading">
+          <span aria-hidden="true">/</span>TooDoo
         </h1>
         <todo-action-button
-          on={{ click: this.handleClick }}
-          attrs={{
-            class: "todo-header-action-button",
-            icon: "+",
-            size: "lg",
-          }}
+          on-click={this.handleClick}
+          className="todo-header-action-button"
+          icon="+"
+          size="lg"
         >
           Add Todo
         </todo-action-button>
