@@ -6,14 +6,11 @@ class TodoActionButton extends RotomElement {
   static get properties() {
     return {
       icon: {
-        default: (c) => c.getAttribute("icon"),
-        type: "string",
         reflected: true,
         required: true,
       },
       size: {
-        default: (c) => c.getAttribute("size") || "md",
-        type: "string",
+        default: "md",
         reflected: true,
       },
     }
