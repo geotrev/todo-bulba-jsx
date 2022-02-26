@@ -1,8 +1,8 @@
-import { jsx } from "snabbdom"
-import { RotomElement, register } from "rotom/jsx"
+import { jsx, Renderer } from "@bulba/jsx"
+import { BulbaElement, register } from "@bulba/element"
 import styles from "./styles.scss"
 
-class TodoFooter extends RotomElement {
+class TodoFooter extends BulbaElement(Renderer) {
   static get styles() {
     return styles
   }

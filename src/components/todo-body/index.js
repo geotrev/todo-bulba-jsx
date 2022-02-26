@@ -1,11 +1,11 @@
-import { jsx } from "snabbdom"
+import { jsx, Renderer } from "@bulba/jsx"
 import debounce from "lodash-es/debounce"
-import { RotomElement, register } from "rotom/jsx"
+import { BulbaElement, register } from "@bulba/element"
 import { dispatch, subscribe, actions } from "../../store"
 import "../todo-action-button"
 import styles from "./styles.scss"
 
-class TodoBody extends RotomElement {
+class TodoBody extends BulbaElement(Renderer) {
   static get properties() {
     return {
       todos: {

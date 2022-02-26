@@ -1,5 +1,5 @@
-import { RotomElement, register } from "rotom/jsx"
-import { jsx } from "snabbdom"
+import { BulbaElement, register } from "@bulba/element"
+import { jsx, Renderer } from "@bulba/jsx"
 import "./theme"
 
 import "./components/todo-header"
@@ -10,14 +10,14 @@ import styles from "./styles.scss"
 
 // define the app
 
-class TodoApp extends RotomElement {
+class TodoApp extends BulbaElement(Renderer) {
   static get styles() {
     return styles
   }
 
   render() {
     return (
-      <div attrs={{ class: "wrapper" }}>
+      <div className="wrapper">
         <todo-header />
         <todo-body />
         <todo-footer />
