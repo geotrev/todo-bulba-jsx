@@ -2,8 +2,7 @@ import path from "path"
 import { terser } from "rollup-plugin-terser"
 import { nodeResolve } from "@rollup/plugin-node-resolve"
 import babel from "@rollup/plugin-babel"
-import serve from "rollup-plugin-serve"
-import livereload from "rollup-plugin-livereload"
+import server from "rollup-plugin-dev"
 import commonjs from "@rollup/plugin-commonjs"
 import scss from "rollup-plugin-scss"
 import sass from "sass"
@@ -24,16 +23,7 @@ const scssOptions = {
 const plugins =
   process.env.BUILD_ENV === "build"
     ? [terser(), gzipPlugin()]
-    : [
-        livereload({ watch: PUBLIC_PATH }),
-        serve({
-          open: true,
-          contentBase: PUBLIC_PATH,
-          historyApiFallback: true,
-          host: "localhost",
-          port: 3000,
-        }),
-      ]
+    : [server({ dirs: [PUBLIC_PATH], port: 3000 })]
 
 export default {
   input: SOURCE_PATH,

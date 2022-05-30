@@ -42,14 +42,8 @@ class TodoBody extends BulbaElement(Renderer) {
   }
 
   handleClick(event) {
-    const path = event.composedPath()
-    const deleteBtn = path.find(
-      (element) => element.tagName && element.tagName === "TODO-ACTION-BUTTON"
-    )
-
-    if (deleteBtn) {
-      dispatch(actions.DELETE_TODO, { id: deleteBtn.parentElement.id })
-    }
+    const deleteBtn = event.target
+    dispatch(actions.DELETE_TODO, { id: deleteBtn.parentElement.id })
   }
 
   handleDebouncedInput(target) {
@@ -83,7 +77,6 @@ class TodoBody extends BulbaElement(Renderer) {
 
     return this.todos.map((todo) => (
       <div
-        on-click={this.handleClick}
         on-input={this.handleInput}
         className="todo"
         id={todo.id}
@@ -92,7 +85,11 @@ class TodoBody extends BulbaElement(Renderer) {
         <textarea className="todo--textarea" placeholder={todo.placeholder}>
           {todo.value}
         </textarea>
-        <todo-action-button className="todo-body-action-button" icon="-">
+        <todo-action-button
+          className="todo-body-action-button"
+          icon="-"
+          on-click={this.handleClick}
+        >
           Delete
         </todo-action-button>
       </div>
