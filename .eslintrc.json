@@ -10,24 +10,7 @@
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
-  "extends": [
-    "eslint:recommended",
-    "prettier"
-  ],
-  "globals": {
-    "Atomics": "readonly",
-    "SharedArrayBuffer": "readonly"
-  },
-  "settings": {
-    "import/resolver": {
-      "node": {
-        "extensions": [".js"],
-        "paths": ["src/"],
-        "moduleDirectory": ["node_modules/"]
-      }
-    },
-    "import/ignore": [".(scss)$"]
-  },
+  "extends": ["eslint:recommended", "prettier"],
   "rules": {
     "no-console": 2,
     "no-unused-vars": ["error", { "varsIgnorePattern": "jsx" }]
